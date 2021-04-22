@@ -1,0 +1,120 @@
+
+body {
+  font-family: "Courier New", Courier, monospace;
+  margin: 0;
+  color: chartreuse;
+  background-image: url("img/background.jpg");
+}
+
+.main {
+  
+  padding: 2%;
+  width: 65%;
+  h1 {
+    text-align: center;
+
+  }
+  input {
+    background: transparent;
+    border: 0;
+    margin-left: 1%;
+  }
+  
+}
+
+.caratula{
+  width: 20%;
+  margin-right: 3%;
+  img{
+    width: 100%;
+  }
+}
+
+hr {
+  border: 0 none chartreuse;
+  border-top: 1px solid chartreuse;
+}
+
+.row {
+  display: flex;
+  flex-wrap: row;
+}
+
+.wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.side {
+  width: 27%;
+  padding: 1%;
+  border: chartreuse solid 3px;
+}
+
+.seleccionado {
+  color: #36b4a8;
+  border-color: chartreuse;
+}
+
+.footer {
+  padding: 2%;
+  border: chartreuse solid 3px;
+}
+
+* {
+  box-sizing: content-box;
+}
+
+
+
+.header {
+  padding: 2%;
+  text-align: center;
+  
+  border: chartreuse solid 3px;
+  display: flex;
+  font-size: 1.2em;
+
+  img {
+    width: 7%;
+    margin-right: 2%;
+  }
+}
+
+.navbar {
+  display: flex;
+  
+  border: chartreuse solid 1px;
+  a {
+    color: chartreuse;
+    padding: 1% 2%;
+    text-align: right;
+    text-decoration: none;
+    
+    &:hover {
+      background-color: #b3ff66;
+      color: black;
+    }
+  }
+}
+
+@media (max-width: 300px) {
+  .row,.navbar {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .side,.main{
+      width: 100%;
+  }
+
+  .header {
+    
+  
+    img {
+      width: 25%;
+    }
+  }
+
+
+}
