@@ -1,16 +1,21 @@
 
-
+var boton = document.getElementById("play");
+var inicio = 0;
+function arkanoid(){
+    inicio = 1;
+    console.log(inicio + "dentro")
+    
 
 var canvas = document.getElementById("myCanvas");
-var boton = document.getElementById("play");
+
 var ctx = canvas.getContext("2d");
 var ballRadius = 10;
 var x = canvas.width/2;
 var y = canvas.height-30;
 var dx = 2;
 var dy = -2;
-var paddleHeight = 10;
-var paddleWidth = 75;
+var paddleHeight = 13;
+var paddleWidth = 80;
 var paddleX = (canvas.width-paddleWidth)/2;
 var rightPressed = false;
 var leftPressed = false;
@@ -22,6 +27,15 @@ var brickPadding = 10;
 var brickOffsetTop = 30;
 var brickOffsetLeft = 30;
 var score = 0;
+var id;
+var gameOver = new Image();
+gameOver.src = "../../img/gameOver.png";
+
+var youWin = new Image();
+youWin.src = "../../img/youWin.jpg";
+
+var pala = new Image();
+pala.src = "../../img/arkanoid.png"
 
 
 
@@ -69,8 +83,10 @@ function collisionDetection() {
                     b.status = 0;
                     score++;
                     if(score == brickRowCount*brickColumnCount) {
-                        alert("YOU WIN, CONGRATS!");
-                        document.location.reload();
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+                        ctx.drawImage(youWin, 0, 0);
+                        clearInterval(id);
+                        inicio = 0;
                     }
                 }
             }
@@ -86,11 +102,8 @@ function drawBall() {
     ctx.closePath();
 }
 function drawPaddle() {
-    ctx.beginPath();
-    ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
-    ctx.fillStyle = "#0095DD";
-    ctx.fill();
-    ctx.closePath();
+   
+    ctx.drawImage(pala, paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
 }
 function drawBricks() {
     for(c=0; c<brickColumnCount; c++) {
@@ -116,6 +129,7 @@ function drawScore() {
 }
 
 function draw() {
+    console.log("dibuja")
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawBricks();
     drawBall();
@@ -134,8 +148,10 @@ function draw() {
             dy = -dy;
         }
         else {
-            alert("GAME OVER");
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(gameOver, 0, 0);
             clearInterval(id);
+            inicio = 0;
         }
     }
     
@@ -150,8 +166,18 @@ function draw() {
     y += dy;
 }
 
+id = setInterval(draw, 10);
 
-    let id = setInterval(draw, 10);
+}
+
+boton.addEventListener('click', function(){
+if (inicio == 0){
+    arkanoid();
+}
+    console.log(inicio + "fuera")
+    this.innerHTML == "restart";
+})
+    
 
 
 
