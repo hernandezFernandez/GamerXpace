@@ -1,0 +1,28 @@
+
+interfaz nueva
+	-aplicar el frame
+
+base de datos
+	-crear base de datos
+
+usuario
+	-interfaz Login
+	-interfaz Register
+	-interfaz Perfil
+	-Registrarlos en la base de datos	
+
+juego1
+	-Niveles
+	-puntos
+	-Subir puntos a los usuarios registrados
+	-Botones para interfaz movil
+	-Boton de play con foto	
+		
+juego2
+	-Empezarlo
+
+foro
+	-hilos
+	-foros
+	-mensajes de usuarios
+

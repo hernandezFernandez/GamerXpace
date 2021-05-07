@@ -1,78 +1,87 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Page Title</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- less -->
-    <link rel="stylesheet/less" type="text/css" href="../../style.less"/>
-    <script src="../../less.min.js" type="text/javascript"></script>
+<head>
+  <title>Page Title</title>
+  <meta charset="UTF-8" />
 
-  
-  </head>
-  <body>
-    
-    <div class="header">
-      
-      <h1>NEWS</h1>
-      
+  <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+  <link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- less -->
+  <link rel="stylesheet/less" type="text/css" href="../../style2.less" />
+  <script src="../../less.min.js" type="text/javascript"></script>
+
+
+</head>
+
+<body>
+
+  <div class="header nes-container is-centered">
+    <div id="tit">
+      <h2 >GAMER</h2><H1>X</H1><h4>PACE</h4>
     </div>
-    <div style="border-top: white; ">
     </div>
-    <div class="navbar">
-      
-      <a href="#">REGISTRARSE</a>
-      <a href="#">LOGEARSE</a>
-      <a id="oscuro">MODO OSCURO</a>
-    </div>
-    
-    <div class="row">
-      <div class="side">
-        <h2>Top 5 articulos</h2>
-        <p>
-          1- "La función del magnesio en el cultivo de plantas"
-          visualizaciones:300
-        </p>
-        <p>
-          2- "La función del manganeso en el cultivo de plantas"
-          visualizaciones:300
-        </p>
-        <p>3- "La cal calcítica y la cal dolomítica" visualizaciones:300</p>
-        <p>
-          4- "Fertilización ideal para las verduras y hierbas finas de
-          invernadero" visualizaciones:300
-        </p>
-        <p>
-          5- "La influencia de la luz en el crecimiento del cultivo"
-          visualizaciones:300
-        </p>
-        <hr>
-        <h2>Top 5 usuarios</h2>
-        <p>
-          1- "La función del magnesio en el cultivo de plantas" lectores:300
-        </p>
-        <p>
-          2- "La función del manganeso en el cultivo de plantas" lectores:300
-        </p>
-        <p>3- "La cal calcítica y la cal dolomítica"lectores:300</p>
-        <p>
-          4- "Fertilización ideal para las verduras y hierbas finas de
-          invernadero" lectores:300
-        </p>
-        <p>
-          5- "La influencia de la luz en el crecimiento del cultivo"
-          lectores:300
-        </p>
+ 
+  <div class="navbar nes-container">
+    <a href="../../index.html" class="nes-btn is-primary">INICIO</a>
+    <a href="#" class="nes-btn is-primary">LOGEARSE</a>
+    <a href="#" class="nes-btn is-primary">FORO</a>
+  </div>
+
+  <div class="row">
+
+    <div class="main nes-container" id="main">
+      <button id="play">play</button>
+      <div id="juego">
+        <canvas id="myCanvas"></canvas>
       </div>
-      <div class="main">
-        <button id="play">play</button>
-        <canvas id="myCanvas" width="480" height="320"></canvas>
-        <script src="juego2.js" type="text/javascript" ></script>
+    
+    
+      <br>
+      <div>
+        <button id="iz">IZQUIERDA</button>
+        <button id="der">DERECHA</button>
       </div>
+    
+    
+      <script src="juego2.js" type="text/javascript"></script>
     </div>
-    <div class="footer">
-      <p>Creado por javier fernandez. Suscribete a nuestro resumen diario <input type="text"><button>Suscribete</button> Contactanos al: 9123123123</p>
+    <div class="side nes-container is-centered">
+      <h2>Juegos mas jugados</h2>      
+      <p>
+        1- Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+      </p>
+      <p>
+        2- Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      </p>
+      <p>3- Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      
+      <hr>
+      <h2>Hilos mas vistos</h2>
+      <p>
+        1- Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      </p>
+      <p>
+        2- Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      </p>
+      <p>3- Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      
     </div>
-  </body>
+    
+  </div>
+  <div class="footer nes-container is-centered">
+    <p>Creado por javier fernandez y miguel hernandez. Suscribete a nuestro resumen diario 
+      <input type="text" class="InFoot"><button class="nes-btn margin">Suscribete</button>
+      Contactanos al: 9123123123</p>
+  </div>
+</body>
+</body>
+
 </html>
+
+
+
+
+

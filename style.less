@@ -1,3 +1,6 @@
+html, body, pre, code, kbd, samp {
+  font-family: "Press Start 2P";
+}
 
 body {
   font-family: "Courier New", Courier, monospace;
@@ -97,14 +100,25 @@ hr {
   }
 }
 
-.ark{
+#myCanvas{
 
-  width: 480 ;
-  height: 320;
-
+  display: none;
+  border: 3px solid chartreuse;
+  
+}
+#juego{
+  width: 70%;
+  margin: 0 auto;
 }
 
-@media (max-width: 400px) {
+#iz, #der{
+  display: none;
+}
+
+
+
+
+@media only screen and (max-width: 600px) {
   .row,.navbar {
     flex-direction: column;
     width: 100%;
@@ -126,15 +140,22 @@ hr {
   .side{
     width: 100%;
     border-bottom: 3px solid chartreuse;
+    border-right: 0px ;
   }
 
-  .header {
-    
   
+
+  .header {
+    width: 100%;
     img {
       width: 25%;
     }
   }
 
+
+  #iz, #der{
+    display: inline-block;
+    width: 40%;
+  }
 
 }

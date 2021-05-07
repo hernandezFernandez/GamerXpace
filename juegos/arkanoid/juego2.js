@@ -1,33 +1,69 @@
 
 var boton = document.getElementById("play");
 var inicio = 0;
+
+
+
+var iz = document.getElementById("iz");
+var der = document.getElementById("der");
+
+iz.addEventListener("mousedown", function(e){ console.log("izP") }, false);
+der.addEventListener("mousedown", function(e){ console.log("derP")}, false);
+
+iz.addEventListener("mouseup", function(e){ console.log("izU") }, false);
+der.addEventListener("mouseup", function(e){ console.log("derU")}, false);
+
+
 function arkanoid(){
     inicio = 1;
-    console.log(inicio + "dentro")
     
 
 var canvas = document.getElementById("myCanvas");
+canvas.style.display="block";
+
+canvas.setAttribute('width', main.clientWidth * 0.8); 
+canvas.setAttribute('height', (main.clientWidth * 0.8) /1.5); 
+
+var ancho = main.clientWidth * 0.8;
+var alto = ((main.clientWidth * 0.8) /1.5);
 
 var ctx = canvas.getContext("2d");
-var ballRadius = 10;
+
+// tamaño del balon
+var ballRadius = ancho/48;
+// posicion del balon
 var x = canvas.width/2;
-var y = canvas.height-30;
-var dx = 2;
-var dy = -2;
-var paddleHeight = 13;
-var paddleWidth = 80;
+var y = canvas.height * 0.9;
+// velocidad de movimiento dle balon
+var dx = (ancho/240);
+var dy = -(ancho/240);
+// alto y ancho de la pala
+var paddleHeight = alto/24;
+var paddleWidth = ancho/4;
+// posicion de la pala
 var paddleX = (canvas.width-paddleWidth)/2;
+// comprobar que boton esta pulsado
 var rightPressed = false;
 var leftPressed = false;
+// cantidad de ladrillos
 var brickRowCount = 5;
-var brickColumnCount = 3;
-var brickWidth = 75;
-var brickHeight = 20;
-var brickPadding = 10;
-var brickOffsetTop = 30;
-var brickOffsetLeft = 30;
+var brickColumnCount = 4;
+
+// medidas de los ladrillos
+var brickWidth = ancho/6.4;
+var brickHeight = alto/16;
+// separacion entre ladrillos
+var brickPadding = ancho/48;
+// separacion de los ladrillos con los margenes
+var brickOffsetTop = ancho/10.6;
+var brickOffsetLeft = ancho/16;
+// puntuacion
 var score = 0;
+// intervalo
 var id;
+// ciclos que lleva de ejecucion el juego
+var temp = 0;
+// imagenes
 var gameOver = new Image();
 gameOver.src = "../../img/gameOver.png";
 
@@ -37,8 +73,11 @@ youWin.src = "../../img/youWin.jpg";
 var pala = new Image();
 pala.src = "../../img/arkanoid.png"
 
+var iz = document.getElementById("iz");
+var der = document.getElementById("der");
 
 
+// arrai de ladrillos y en el que se generan los ladrillos, el staus indica si esta roto o sigue vivo
 var bricks = [];
 for(c=0; c<brickColumnCount; c++) {
     bricks[c] = [];
@@ -49,42 +88,62 @@ for(c=0; c<brickColumnCount; c++) {
 
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
-document.addEventListener("mousemove", mouseMoveHandler, false);
 
-function keyDownHandler(e) {
+// document.addEventListener("mousemove", mouseMoveHandler, false);
+
+iz.addEventListener("touchstart",function(e){ keyDownHandler(e, "iz")} , false);
+der.addEventListener("touchstart",function(e){ keyDownHandler(e, "der")}, false);
+iz.addEventListener("touchend",function(e){ keyUpHandler(e, "iz")} , false);
+der.addEventListener("touchend",function(e){ keyUpHandler(e, "der")} , false);
+
+function keyDownHandler(e, but) {
     if(e.keyCode == 39) {
         rightPressed = true;
     }
     else if(e.keyCode == 37) {
         leftPressed = true;
+    } 
+    else if(but == "der"){
+        rightPressed = true;
+    } 
+    else if(but == "iz"){
+        leftPressed = true;
     }
 }
-function keyUpHandler(e) {
+function keyUpHandler(e, but) {
     if(e.keyCode == 39) {
         rightPressed = false;
     }
     else if(e.keyCode == 37) {
         leftPressed = false;
     }
-}
-function mouseMoveHandler(e) {
-    var relativeX = e.clientX - canvas.offsetLeft;
-    if(relativeX > 0 && relativeX < canvas.width) {
-        paddleX = relativeX - paddleWidth/2;
+    else if(but == "der"){
+        rightPressed = false;
+    } 
+    else if(but == "iz"){
+        leftPressed = false;
     }
 }
+
+// function mouseMoveHandler(e) {
+//     var relativeX = e.clientX - canvas.offsetLeft;
+//     if(relativeX > 0 && relativeX < canvas.width) {
+//         paddleX = relativeX - paddleWidth/2;
+//     }
+// }
+
 function collisionDetection() {
     for(c=0; c<brickColumnCount; c++) {
         for(r=0; r<brickRowCount; r++) {
             var b = bricks[c][r];
             if(b.status == 1) {
-                if(x > b.x && x < b.x+brickWidth && y > b.y && y < b.y+brickHeight) {
+                if(x + ballRadius >= b.x && x <= b.x+brickWidth && y + ballRadius >= b.y && y <= b.y+brickHeight) {
                     dy = -dy;
                     b.status = 0;
                     score++;
                     if(score == brickRowCount*brickColumnCount) {
                         ctx.clearRect(0, 0, canvas.width, canvas.height);
-                        ctx.drawImage(youWin, 0, 0);
+                        ctx.drawImage(youWin, 0, 0, canvas.width, canvas.height);
                         clearInterval(id);
                         inicio = 0;
                     }
@@ -129,27 +188,29 @@ function drawScore() {
 }
 
 function draw() {
-    console.log("dibuja")
+    temp += 1
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawBricks();
     drawBall();
     drawPaddle();
     drawScore();
     collisionDetection();
-    
+// toca pared
     if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
         dx = -dx;
     }
+// Toca techo
     if(y + dy < ballRadius) {
         dy = -dy;
     }
-    else if(y + dy > canvas.height-ballRadius) {
-        if(x > paddleX && x < paddleX + paddleWidth) {
+// toca la pala o se cae   
+    if(y + dy >= canvas.height - paddleHeight - ballRadius) {
+        if(x + ballRadius > paddleX  && x < paddleX + paddleWidth) {
             dy = -dy;
-        }
-        else {
+        } 
+        else{
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.drawImage(gameOver, 0, 0);
+            ctx.drawImage(gameOver, 0, 0, canvas.width, canvas.height);
             clearInterval(id);
             inicio = 0;
         }
@@ -174,8 +235,7 @@ boton.addEventListener('click', function(){
 if (inicio == 0){
     arkanoid();
 }
-    console.log(inicio + "fuera")
-    this.innerHTML == "restart";
+    this.innerHTML = "restart";
 })
     
 
