@@ -1,1 +1,0 @@
-<script type='text/javascript'>window.location.replace('tfg/index.php')</script>
