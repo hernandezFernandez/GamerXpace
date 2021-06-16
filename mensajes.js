@@ -61,12 +61,13 @@ function enviarMens(event){
     datos.mens = mensaje;
     datos.usu = usuario;
 
-
+    
     peticion.onreadystatechange = function () {
         if (peticion.readyState == 4) {
             if (peticion.status == 200) {
                 console.log("peticion: " + peticion.responseText)
-                window.location.reload();
+                window.location="/tfg/mensajes.php?hilo="+id;
+                console.log("cambia de pag")
             }
         }
     }
@@ -98,7 +99,7 @@ function enviarHilo(){
                     console.log(peticion.responseText)
                     var respuesta = peticion.responseText;
                     if(respuesta == "    "){
-                        window.location.reload();
+                        window.location="/tfg/foro.php";
                     } else {
                         document.getElementById("error").innerHTML = peticion.responseText
                     }

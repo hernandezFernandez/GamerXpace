@@ -138,7 +138,7 @@ hr {
   margin: 0 auto;
 }
 
-#iz, #der{
+#iz, #der, #fire{
   display: none;
 }
 
@@ -152,6 +152,23 @@ hr {
 }
 
 
+  .ness-btn{
+    border-image-repeat: stretch !important;
+  }
+
+  #dialog-default{
+    display: none;
+  }
+
+  #instrucciones{
+    text-align: center;
+    margin: 1%;
+  }
+  #play{
+    width: 30%;
+    height: 15%;
+  }
+  
 
 
 @media only screen and (max-width: 600px) {
@@ -167,6 +184,12 @@ hr {
     margin-left: 1%;
   }
 }
+
+body{
+font-size: 0.7em;
+}
+
+
   .row,.navbar {
     flex-direction: column;
     a{
@@ -205,12 +228,15 @@ hr {
 
  
 
-  #iz, #der{
+  #iz, #der, #fire{
     display: inline-block;
-    width: 40%;
+    user-select: none;
+    width: 20%;
+    font-size: 2em;
+
   }
 
-  .mensaje{
+  .foro{
     font-size: 0.7em;
   }
 

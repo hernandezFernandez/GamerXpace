@@ -11,7 +11,7 @@ include 'conexion.php';
   <title>Page Title</title>
   <meta charset="UTF-8" />
   <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
-  <link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet" />
+  <link href="/tfg/ness.css" rel="stylesheet" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -33,17 +33,16 @@ include 'conexion.php';
   </div>
 
   <div class="navbar nes-container">
-    <a href="index.php" class="nes-btn is-primary">INICIO</a>
+    <a href="/tfg/index.php" class="nes-btn is-primary">INICIO</a>
     <?php
       if($_SESSION["loggedin"]){
-        echo "<a href='/tfg/perfil.php?id=" . $_SESSION["user"] . "' class='nes-btn is-primary'>PERFIL</a>";
+        echo "<a href='/tfg/perfil.php?id=" . $_SESSION["user"] . "' class='nes-btn is-primary'>PERFIL:" . $_SESSION["user"] . "</a>";
       } else {
-        echo "<a href='/tfg/login.php' class='nes-btn is-primary'>LOGEARSE</a>";
+        echo "<a href='/tfg/login.php' class='nes-btn is-primary'>LOGARSE</a>";
       }
     ?>
     
     <a href="/tfg/foro.php" class="nes-btn is-primary">FORO</a>
-    <?php echo "<span id='user'>" . $_SESSION["user"] . "</span>"; ?>
   </div>
 
   <script type="text/javascript">
@@ -77,7 +76,8 @@ include 'conexion.php';
             $MyBBDD2 = clone $MyBBDD;
             $MyBBDD2->consulta("SELECT img_perf from `usuarios` where id_usu = '". $fila['autor'] . "'");
             $fila2 = $MyBBDD2->extraer_registro();
-              echo "<td><p>" . $fila['autor'] . "</p> <i class='". $fila2['img_perf'] ."'></i></td>";
+              echo "<td><p><a href='https://gamerspace69.000webhostapp.com/tfg/perfil.php?id=" . $fila['autor'] . "'> " . $fila['autor'] . "</a></p> <i class='". $fila2['img_perf'] ."'></i></td>";
+              
                   //mensaje 
               echo "<td><p>" . $fila['mensaje'] . "</p></td>";
             echo "</tr>";
@@ -118,31 +118,16 @@ include 'conexion.php';
   }
     ?>
 
-<section >
-  <button type="button" class="nes-btn is-primary" onclick="document.getElementById('dialog-default').showModal();" <?php if($_SESSION["loggedin"] == false){ echo "style='display: none'";};?> >
-    Crear mensaje
-  </button>
-  <dialog class="nes-dialog" id="dialog-default">
-    <form method="dialog">
-      <p class="title">Crear texto</p>
-      <textarea id="textarea_field" class="nes-textarea" style="width: 80%;height: 9em"></textarea>
-      <menu class="dialog-menu">
-        <button class="nes-btn">cancelar</button>
-        <button class="nes-btn is-primary" onclick="enviarMens(this)" id="<?php echo $_GET['hilo']?>">crear</button>
-      </menu>
-    </form>
-  </dialog>
-</section>
+<a class="nes-btn is-primary" href="/tfg/crearMensaje.php?hilo=<?php echo $_GET['hilo'] ?>" <?php if($_SESSION["loggedin"] == false){ echo "style='display: none'";};?> >Crear Mensaje</a>
 
   </div>
   <div class="footer nes-container is-centered">
     
-    <p>Creado por javier fernandez y miguel hernandez.Contactanos al: 9123123123
-    </p><br>
-  <i class="nes-icon youtube is-medium"></i>
-  <i class="nes-icon instagram is-medium"></i>
-  <i class="nes-icon twitch is-medium"></i>
-  <i class="nes-icon twitter is-medium"></i>
+  <p>Creado por Javier Fernandez y Miguel Hernandez.Contactanos al: 9123123123    </p><br>
+    <a href="https://www.youtube.com/"><i class="nes-icon youtube is-medium"></i></a>
+  <a href="https://www.instagram.com/"><i class="nes-icon instagram is-medium"></i></a>
+  <a href="https://www.twitch.tv/"><i class="nes-icon twitch is-medium"></i></a>
+  <a href="https://twitter.com/"><i class="nes-icon twitter is-medium"></i></a>
 
   </div>
 </body>
