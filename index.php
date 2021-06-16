@@ -13,7 +13,7 @@ include 'conexion.php';
 <html>
 
 <head>
-  <title>Page Title</title>
+  <title>Inicio</title>
   <meta charset="UTF-8" />
   <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
   <link href="/tfg/ness.css" rel="stylesheet" />
@@ -28,8 +28,7 @@ include 'conexion.php';
 </head>
 
 <body>
-  <!-- <img src="img/titulo.gif" alt="Funny image" width="200px" height="200px" style="position: absolute; z-index: 100; animation-name: example; animation-duration: 4s" >  -->
-
+  <!-- div que contiene el header con el titulo -->
   <div class="header nes-container is-centered">
     <div id="tit">
       <h2>GAMER</h2>
@@ -37,7 +36,7 @@ include 'conexion.php';
       <h4>PACE</h4>
     </div>
   </div>
-
+<!-- div que contiene la barra de navegacion -->
   <div class="navbar nes-container">
     <a href="/tfg/index.php" class="nes-btn is-primary">INICIO</a>
     <?php
@@ -50,10 +49,10 @@ include 'conexion.php';
     
     <a href="/tfg/foro.php" class="nes-btn is-primary">FORO</a>
   </div>
-
+<!-- div principal -->
   <div class="row">
     <div class="main wrap nes-container">
-
+<!-- muestra las caratulas de los juegos como enlaces -->
       <div class="caratula">
         <a href="/tfg/juegos/arkanoid/arkanoid.php">
           <img src="img/arkanoid.jpg">
@@ -66,9 +65,11 @@ include 'conexion.php';
       </div>
 
     </div>
+    <!-- side con los rankings  -->
     <div class="side nes-container is-centered">
       <h2>Ranking mayores puntuaciones</h2>
       <?php 
+      // select que comprueba los ranking del juego arkanoid
       $MyBBDD->consulta("SELECT `id_usu`, `puntosMax` FROM `usuarios` ORDER BY puntosMax DESC LIMIT 3");
       $linea = 1;
       while ($fila = $MyBBDD->extraer_registro()) {
@@ -79,6 +80,7 @@ include 'conexion.php';
 
       <h2>Hilos mas comentados</h2>
       <?php 
+      // select que comprueba los hilos con mas mensajes
       $MyBBDD->consulta("SELECT fk_id_hilo as tema, count(id_mensaje) as total FROM Mensajes GROUP BY fk_id_hilo ORDER BY total DESC LIMIT 3");
       $linea = 1;
       $MyBBDD2 = clone $MyBBDD;

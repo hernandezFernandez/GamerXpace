@@ -8,7 +8,7 @@ include 'conexion.php';
 <html>
 
 <head>
-  <title>Page Title</title>
+  <title>Crear Mensaje</title>
   <meta charset="UTF-8" />
   <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
   <link href="/tfg/ness.css" rel="stylesheet" />
@@ -51,7 +51,7 @@ include 'conexion.php';
 
   <div class="register nes-container ">
 
-
+<!-- input que crea el mensaje con el js -->
     <p class="title">Crear Mensaje</p>
     <textarea id="textarea_field" class="nes-textarea" style="width: 80%;height: 9em"></textarea>
     <button class="nes-btn is-primary" onclick="enviarMens(this)" id="<?php echo $_GET['hilo']?>">crear</button>

@@ -1,7 +1,8 @@
 <?php
+// inicia la sesion de php
 session_start();
 
-
+// si ya esta iniciada la sesion devuelve al index
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
   header("location: index.php");
   echo "<script type='text/javascript'>window.location.replace('index.php')</script>;";
@@ -96,7 +97,7 @@ if ($_POST) {
 <html>
 
 <head>
-  <title>Page Title</title>
+  <title>Registro</title>
   <meta charset="UTF-8" />
   <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
   <link href="/tfg/ness.css" rel="stylesheet" />
@@ -104,7 +105,7 @@ if ($_POST) {
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <script>
-
+// cambia la imagen de perfil segun se seleccione una u otra
     window.addEventListener("load", function () {
             var perfil = document.getElementById("perf")
             var select = document.getElementById("default_select")
@@ -127,8 +128,7 @@ if ($_POST) {
 </head>
 
 <body>
-  <!-- <img src="img/titulo.gif" alt="Funny image" width="200px" height="200px" style="position: absolute; z-index: 100; animation-name: example; animation-duration: 4s" >  -->
-
+  
   <div class="header nes-container is-centered">
     <div id="tit">
       <h2>GAMER</h2>
@@ -151,14 +151,14 @@ if ($_POST) {
   </div>
 
   <div class="register nes-container is-centered">
-
+<!-- formulario de registro -->
     <form method='POST' action="">
 
-
+      
       <div class="input">
         <label for="nombre">Nombre de Usuario</label>
         <input type="text" id="nombre" name="usuario" class="nes-input" required maxlength="29">
-
+<!-- php que escribe el error en caso de que haya -->
         <?php echo $user_err ?>
 
       </div>
@@ -183,6 +183,7 @@ if ($_POST) {
         <?php echo $naci_err ?>
 
       </div>
+      <!-- selec de la imagen de perfil -->
       <div class="input">
         <label for="default_select">Imagen de perfil</label>
         <div class="nes-select">
@@ -198,6 +199,7 @@ if ($_POST) {
           </select>
         </div>
         <br>
+        <!-- area donde muestra la imagen -->
         <i class="" id="perf"></i>
 
         <?php echo $perf_err ?>
@@ -205,7 +207,7 @@ if ($_POST) {
       </div>
 
       
-
+<!-- boton de enviar registro -->
       <div class="input">
         <button type='submit' name='registrar' class='nes-btn'>Registrar</button>
       </div>

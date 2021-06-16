@@ -12,7 +12,7 @@ include 'conexion.php';
 <html>
 
 <head>
-  <title>Page Title</title>
+  <title>Foro</title>
   <meta charset="UTF-8" />
   <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
   <link href="/tfg/ness.css" rel="stylesheet" />
@@ -71,15 +71,15 @@ include 'conexion.php';
     <tbody>
 
     <?php 
-    
+    // selecciona todos los hilos
     $MyBBDD->consulta("SELECT * FROM hilos");
 
     while ($fila = $MyBBDD->extraer_registro()) {
-
+// Muestra todos los hilos con su informacion
       echo "<tr>";
       echo "<td> <a href='mensajes.php?hilo=". $fila['id_tema'] . "'>" . $fila['tema'] . "</a></td>";
       echo "<td>" . $fila['autor'] . "</td>";
-
+// comprueba cual es el ultimo mensaje del hilo y lo muestra
       $MyBBDD2 = clone $MyBBDD;
       $MyBBDD2->consulta("SELECT `autor`, `creacion` FROM `Mensajes` WHERE `fk_id_hilo` =". $fila['id_tema'] . " ORDER BY creacion DESC ");
       $fila2 = $MyBBDD2->extraer_registro();
@@ -87,27 +87,17 @@ include 'conexion.php';
       if($fila2['autor'] != ""){
         echo "<td>" . $fila2['autor'] . "<br>" . $fila2['creacion'] . "</td>";
                 } else{
+                  // en caso de que no tenga muestra esto
         echo "<td> No hay mensajes </td>";
                 }
 
      
-      
+      // select que cuenta el numero de mensajes de cada hilo
       $MyBBDD2 = clone $MyBBDD;
       $MyBBDD2->consulta("SELECT count(id_mensaje) as total FROM Mensajes where fk_id_hilo = ". $fila['id_tema']);
       $fila2 = $MyBBDD2->extraer_registro();
 
       echo "<td>" . $fila2['total'] . "</td>";
-      // $MyBBDD2 = clone $MyBBDD;
-      //       $MyBBDD2->consulta("SELECT sum(`like`) as `like` from `likes` where fk_id_hilo = ". $fila['id_tema']);
-      //       while ($fila2 = $MyBBDD2->extraer_registro()) {
-      //         if($fila2['like'] != ""){
-      //           $like = $fila2['like'];
-      //         } else{
-      //           $like = 0;
-      //         }
-      //       }
-      // echo "<td>" . $like . "</td>";
-
       echo "<td>" . $fila['create'] . "</td>";
 
       echo "</tr>";
@@ -132,7 +122,7 @@ include 'conexion.php';
 
 </div>
   
-  <!-- <p>Nuevo juego a punto de salir   Creador: javier  ultimo mensaje:  cantidad de mensajes:  like: </p> -->
+
 
   </div>
   <div class="footer nes-container is-centered">

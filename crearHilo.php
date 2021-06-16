@@ -12,7 +12,7 @@ include 'conexion.php';
 <html>
 
 <head>
-  <title>Page Title</title>
+  <title>Crear Hilo</title>
   <meta charset="UTF-8" />
   <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
   <link href="/tfg/ness.css" rel="stylesheet" />
@@ -58,7 +58,7 @@ include 'conexion.php';
   
   
   
-  
+  <!-- input que crea el hilo con el js -->
       <p class="title">Escriba un titulo</p>
       <input type="text" id="tema" maxlength="44">
         <button class="nes-btn is-primary" onclick="enviarHilo(this)">Crear hilo</button>
@@ -71,7 +71,7 @@ include 'conexion.php';
 
 </div>
   
-  <!-- <p>Nuevo juego a punto de salir   Creador: javier  ultimo mensaje:  cantidad de mensajes:  like: </p> -->
+  
 
   </div>
   <div class="footer nes-container is-centered">

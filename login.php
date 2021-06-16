@@ -75,7 +75,7 @@ if ($_POST) {
 <html>
 
 <head>
-  <title>Page Title</title>
+  <title>Login</title>
   <meta charset="UTF-8" />
   <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
   <link href="/tfg/ness.css" rel="stylesheet" />
@@ -114,7 +114,7 @@ if ($_POST) {
   </div>
 
   <div class="register nes-container is-centered">
-
+<!-- form de login -->
     <form method='POST' action="">
 
 

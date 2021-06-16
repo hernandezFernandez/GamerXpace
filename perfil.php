@@ -3,11 +3,11 @@ session_start();
 include 'conexion.php';
 
 
-
+//comprueba si existe una id pasada por parametro en la url
 if(isset($_GET["id"])){
-  
+  // recoge los campos de la BBDD del usuario
   $MyBBDD->consulta("SELECT * FROM usuarios where id_usu = '" . $_GET["id"] ."'");
-
+  // los guarda en variables
     while ($fila = $MyBBDD->extraer_registro()) {
 
       $user = $fila['id_usu'];
@@ -21,7 +21,7 @@ if(isset($_GET["id"])){
       $puntostotalNav = $fila['totalPuntnav'];
 
     }
-
+    // coge la posicion del rankin de cada juego tanto de puntuacion total como de la puntuacion mas alta
     $MyBBDD->consulta("SELECT pos FROM (SELECT id_usu, ROW_NUMBER() OVER(ORDER BY `puntosMax` DESC) AS 'pos' FROM usuarios) as rank WHERE id_usu = '$user'");
     $fila = $MyBBDD->extraer_registro();
     
@@ -41,12 +41,12 @@ if(isset($_GET["id"])){
     $fila = $MyBBDD->extraer_registro();
     
     $rankNavT = $fila['pos'];
-    
+    // si no hay id vuelve al inicio
 } else {
   header("location: login.php");
   echo "<script type='text/javascript'>window.location.replace('login.php')</script>;";
 }
-
+// si se pulsa el boton de cerrar sesion las variables de sesion loggedin y user se resetean y vuelve al index
 if(isset($_POST["Cerrar_Sesion"])){
   $_SESSION["loggedin"] = false;
   $_SESSION["user"] = "";   
@@ -65,7 +65,7 @@ if(isset($_POST["Cerrar_Sesion"])){
 <html>
 
 <head>
-  <title>Page Title</title>
+  <title>Perfil</title>
   <meta charset="UTF-8" />
   <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
   <link href="/tfg/ness.css" rel="stylesheet" />
@@ -102,7 +102,7 @@ if(isset($_POST["Cerrar_Sesion"])){
     
     <a href="/tfg/foro.php" class="nes-btn is-primary">FORO</a>
   </div>
-
+<!-- muestra las variables recogidas de la BBDD -->
   <div class="register nes-container ">
     <?php echo "<p>Imagen de perfil: </p><i class='$perf'></i>" ?>
     <p>
@@ -114,7 +114,7 @@ if(isset($_POST["Cerrar_Sesion"])){
 
        Puntuacion total:  <?php echo $totalPunt?><br>
        Puntuacion maxima: <?php echo $puntosMax?><br>
-       ranking:<br>
+       Ranking:<br>
        -Puntuacion maxima: <?php echo $rank?><br>
        -Puntuacion total:  <?php echo $rankT?><br><br>
 
@@ -122,20 +122,21 @@ if(isset($_POST["Cerrar_Sesion"])){
 
        Puntuacion total:  <?php echo$puntosMaxNav?><br>
        Puntuacion maxima: <?php echo$puntostotalNav?><br>
-       ranking:<br>
+       Ranking:<br>
        -Puntuacion maxima: <?php echo $rankNav?><br>
        -Puntuacion total:  <?php echo $rankNavT?><br>
 
        
     </p>
     <p>
-       fecha de nacimiento: <?php echo $fech_nac?><br>
+       Fecha de nacimiento: <?php echo $fech_nac?><br>
        Fecha de creacion de cuenta: <?php echo $crea?>
     </p>
   <?php 
+  // si no estas viendo tu usuario no aparece el boton de cerrar sesion
     if($_SESSION['user'] == $_GET["id"]){
       echo "<form method='POST' action=''>";
-      echo    "<button name='Cerrar_Sesion'>cerrar sesion</button>";
+      echo    "<button name='Cerrar_Sesion' class='nes-btn'>cerrar sesión</button>";
       echo "</form>";
     }
     ?>

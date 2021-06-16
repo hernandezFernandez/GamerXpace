@@ -8,7 +8,7 @@ include 'conexion.php';
 <html>
 
 <head>
-  <title>Page Title</title>
+  <title>Mensajes</title>
   <meta charset="UTF-8" />
   <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
   <link href="/tfg/ness.css" rel="stylesheet" />
@@ -53,13 +53,13 @@ include 'conexion.php';
 
 
   
-
+<!-- si estas logeado muestra los mensajes -->
     <?php 
     if($_SESSION["loggedin"]){
     
-    // cambiar hilo
+    // muestra los mensajes del hilo que estamos viendo, que ha sido recogido por parametro de la url
     $MyBBDD->consulta("SELECT autor, id_mensaje, mensaje, DATE_FORMAT(creacion, '%y/%m/%d %T') as creacion FROM `Mensajes` WHERE fk_id_hilo = '" . $_GET["hilo"] . "' ORDER BY `creacion`");
-    
+    // crea los mensajes con la FK del hilo en la BBDD
     while ($fila = $MyBBDD->extraer_registro()) {
       
       echo "<div class='nes-table-responsive mensaje'>";
@@ -67,12 +67,13 @@ include 'conexion.php';
           echo "<tbody>";
             // parte de arriba 
             echo "<tr>";
-                  // fecha $fila['img_perf']
+                  
               echo "<td colspan='2'>" . $fila['creacion'] . "</td>";
             echo "</tr>";
             // parte de abajo 
             echo "<tr>";
                   // autor 
+                  // al necesitar una consulta dentro de otra clono el objeto de la BBDDD para comprobar si el usuario ha dado like al mensaje y la foto de perfil
             $MyBBDD2 = clone $MyBBDD;
             $MyBBDD2->consulta("SELECT img_perf from `usuarios` where id_usu = '". $fila['autor'] . "'");
             $fila2 = $MyBBDD2->extraer_registro();
@@ -82,7 +83,7 @@ include 'conexion.php';
               echo "<td><p>" . $fila['mensaje'] . "</p></td>";
             echo "</tr>";
             echo "<tr>";
-            
+            // compruebo si el usuario a dado like al mensaje
             $MyBBDD2->consulta("SELECT sum(`like`) as `like` from `likes` where fk_id_mensaje = ". $fila['id_mensaje']);
             while ($fila2 = $MyBBDD2->extraer_registro()) {
               if($fila2['like'] != ""){
@@ -93,13 +94,13 @@ include 'conexion.php';
             }
 
             $MyBBDD3 = clone $MyBBDD;
-            // cambiar usu
+            // consulta para ver los likes de cada mensaje
             $MyBBDD3->consulta("SELECT `like` FROM `likes` WHERE `fk_id_usu` = '" . $_SESSION["user"] . "' and `fk_id_mensaje`=" . $fila['id_mensaje']);
             while ($fila3 = $MyBBDD3->extraer_registro()) {
               $marca = $fila3['like'] ;
               
             }
-
+            // muestra el boton lleno si se ha dado like 
             if($marca == 1){
               $marca = "";
             } else{
